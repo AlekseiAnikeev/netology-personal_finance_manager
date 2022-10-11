@@ -1,6 +1,5 @@
 package ru.agentche.personal_finance_manager;
 
-
 import ru.agentche.personal_finance_manager.server.Server;
 import ru.agentche.personal_finance_manager.treatment.Miscalculation;
 import ru.agentche.personal_finance_manager.treatment.Request;

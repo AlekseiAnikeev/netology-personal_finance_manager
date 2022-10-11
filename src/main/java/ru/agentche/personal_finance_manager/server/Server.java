@@ -18,10 +18,12 @@ public class Server implements Runnable {
     private static final int PORT = 8989;
     Request request;
     Miscalculation miscalculations;
-    public Server(Request request, Miscalculation miscalculations){
+
+    public Server(Request request, Miscalculation miscalculations) {
         this.request = request;
         this.miscalculations = miscalculations;
     }
+
     @Override
     public void run() {
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
