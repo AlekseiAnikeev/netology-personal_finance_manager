@@ -20,7 +20,7 @@ public class Client {
              PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
              BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))
         ) {
-            out.println("{\"title\": \"вася\", \"date\": \"2022.02.08\", \"sum\": 4010}");
+            out.println("{\"title\": \"булка\", \"date\": \"2022.02.08\", \"sum\": 200}");
             System.out.println(in.readLine());
         } catch (
                 IOException e) {
