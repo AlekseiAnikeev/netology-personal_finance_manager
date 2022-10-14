@@ -11,9 +11,8 @@ public class Category implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 4533824341543131208L;
-
     private final Map<String, String> categoriesTemplate = new HashMap<>();
-    private final Map<String, Integer> listOfAcquisitions = new HashMap<>();
+    private final Map<String, List<Purchase>> listOfAcquisitions = new HashMap<>();
 
     public Category() {
         intiCategories();
@@ -21,12 +20,12 @@ public class Category implements Serializable {
     }
 
     private void initListOfAcquisitions() {
-        listOfAcquisitions.put("другое", 0);
+        listOfAcquisitions.put("другое", new ArrayList<>());
         for (Map.Entry<String, String> entry : categoriesTemplate.entrySet()) {
             if (listOfAcquisitions.containsKey(entry.getValue())) {
                 continue;
             }
-            listOfAcquisitions.put(entry.getValue(), 0);
+            listOfAcquisitions.put(entry.getValue(), new ArrayList<>());
         }
     }
 
@@ -48,7 +47,7 @@ public class Category implements Serializable {
         return categoriesTemplate;
     }
 
-    public Map<String, Integer> getListOfAcquisitions() {
+    public Map<String, List<Purchase>> getListOfAcquisitions() {
         return listOfAcquisitions;
     }
 
@@ -59,7 +58,6 @@ public class Category implements Serializable {
             throw new RuntimeException(e);
         }
     }
-
 
     public static Category loadFromBinFile(File file) {
         Category category;
