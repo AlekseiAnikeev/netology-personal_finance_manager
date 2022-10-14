@@ -1,17 +1,18 @@
 package ru.agentche.personal_finance_manager.entity;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 /**
  * @author Aleksey Anikeev aka AgentChe
  * Date of creation: 10.10.2022
  */
-public class Category {
+public class Category implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 4533824341543131208L;
     private final Map<String, String> categoriesTemplate = new HashMap<>();
-    private final Map<String, Integer> listOfAcquisitions = new HashMap<>();
+    private final Map<String, List<Purchase>> listOfAcquisitions = new HashMap<>();
 
     public Category() {
         intiCategories();
@@ -19,12 +20,12 @@ public class Category {
     }
 
     private void initListOfAcquisitions() {
-        listOfAcquisitions.put("другое", 0);
+        listOfAcquisitions.put("другое", new ArrayList<>());
         for (Map.Entry<String, String> entry : categoriesTemplate.entrySet()) {
             if (listOfAcquisitions.containsKey(entry.getValue())) {
                 continue;
             }
-            listOfAcquisitions.put(entry.getValue(), 0);
+            listOfAcquisitions.put(entry.getValue(), new ArrayList<>());
         }
     }
 
@@ -46,7 +47,25 @@ public class Category {
         return categoriesTemplate;
     }
 
-    public Map<String, Integer> getListOfAcquisitions() {
+    public Map<String, List<Purchase>> getListOfAcquisitions() {
         return listOfAcquisitions;
+    }
+
+    public void saveBin(File file) {
+        try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file))) {
+            os.writeObject(this);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Category loadFromBinFile(File file) {
+        Category category;
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            category = (Category) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return category;
     }
 }
