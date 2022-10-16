@@ -2,7 +2,6 @@ package ru.agentche.personal_finance_manager.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -13,8 +12,6 @@ import static ru.agentche.personal_finance_manager.server.Server.dateTimeFormatt
  * Date of creation: 10.10.2022
  */
 public class Purchase implements Serializable {
-    @Serial
-    private static final long serialVersionUID = -2299982128974797230L;
     private final String title;
     private final LocalDate date;
     private final int sum;

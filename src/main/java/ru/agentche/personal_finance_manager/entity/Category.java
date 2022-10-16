@@ -8,9 +8,6 @@ import java.util.*;
  * Date of creation: 10.10.2022
  */
 public class Category implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = 4533824341543131208L;
     private final Map<String, String> categoriesTemplate = new HashMap<>();
     private final Map<String, List<Purchase>> listOfAcquisitions = new HashMap<>();
 
