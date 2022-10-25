@@ -11,7 +11,6 @@ import java.io.File;
  */
 public class Request {
     private final String FILE_DATA_PATH = "src/main/resources/data.bin";
-    private final String FILE_CATEGORY_PATH = "src/main/resources/categories.tsv";
     private final CategoryManager categories;
 
     public Request() {
@@ -37,6 +36,7 @@ public class Request {
         if (file.exists()) {
             categoryManager = CategoryManager.loadFromBinFile(file);
         } else {
+            String FILE_CATEGORY_PATH = "src/main/resources/categories.tsv";
             categoryManager = new CategoryManager(FILE_CATEGORY_PATH);
         }
         return categoryManager;
