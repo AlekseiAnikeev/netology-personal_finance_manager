@@ -7,12 +7,12 @@ import java.util.*;
  * @author Aleksey Anikeev aka AgentChe
  * Date of creation: 10.10.2022
  */
-public class Category implements Serializable {
+public class CategoryManager implements Serializable {
     private final Map<String, String> categoriesTemplate = new HashMap<>();
     private final Map<String, List<Purchase>> listOfAcquisitions = new HashMap<>();
 
-    public Category() {
-        intiCategories();
+    public CategoryManager(String fileName) {
+        intiCategories(fileName);
         initListOfAcquisitions();
     }
 
@@ -26,8 +26,7 @@ public class Category implements Serializable {
         }
     }
 
-    private void intiCategories() {
-        String fileName = "src/main/resources/categories.tsv";
+    private void intiCategories(String fileName) {
         try (
                 BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             while (bufferedReader.ready()) {
@@ -56,13 +55,13 @@ public class Category implements Serializable {
         }
     }
 
-    public static Category loadFromBinFile(File file) {
-        Category category;
+    public static CategoryManager loadFromBinFile(File file) {
+        CategoryManager categoryManager;
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            category = (Category) ois.readObject();
+            categoryManager = (CategoryManager) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return category;
+        return categoryManager;
     }
 }

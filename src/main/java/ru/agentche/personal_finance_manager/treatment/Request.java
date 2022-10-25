@@ -1,6 +1,6 @@
 package ru.agentche.personal_finance_manager.treatment;
 
-import ru.agentche.personal_finance_manager.entity.Category;
+import ru.agentche.personal_finance_manager.entity.CategoryManager;
 import ru.agentche.personal_finance_manager.entity.Purchase;
 
 import java.io.File;
@@ -11,7 +11,8 @@ import java.io.File;
  */
 public class Request {
     private final String FILE_DATA_PATH = "src/main/resources/data.bin";
-    private final Category categories;
+    private final String FILE_CATEGORY_PATH = "src/main/resources/categories.tsv";
+    private final CategoryManager categories;
 
     public Request() {
         categories = initializationCategory();
@@ -26,18 +27,18 @@ public class Request {
         categories.saveBin(new File(FILE_DATA_PATH));
     }
 
-    public Category getCategories() {
+    public CategoryManager getCategories() {
         return categories;
     }
 
-    private Category initializationCategory() {
+    private CategoryManager initializationCategory() {
         File file = new File(FILE_DATA_PATH);
-        Category category;
+        CategoryManager categoryManager;
         if (file.exists()) {
-            category = Category.loadFromBinFile(file);
+            categoryManager = CategoryManager.loadFromBinFile(file);
         } else {
-            category = new Category();
+            categoryManager = new CategoryManager(FILE_CATEGORY_PATH);
         }
-        return category;
+        return categoryManager;
     }
 }

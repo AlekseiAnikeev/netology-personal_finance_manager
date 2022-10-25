@@ -1,6 +1,6 @@
 package ru.agentche.personal_finance_manager.treatment;
 
-import ru.agentche.personal_finance_manager.entity.Category;
+import ru.agentche.personal_finance_manager.entity.CategoryManager;
 import ru.agentche.personal_finance_manager.entity.Purchase;
 
 import java.util.*;
@@ -12,7 +12,7 @@ import java.util.*;
 public class Miscalculation {
     private final Map<String, Integer> maxCategoryAllTime = new HashMap<>();
 
-    public String getStatistic(Category categories, Purchase purchase) {
+    public String getStatistic(CategoryManager categories, Purchase purchase) {
         return "{" +
                 getMaxCategoryAllTime(categories) +
                 getMaxYearCategory(categories, purchase) +
@@ -21,7 +21,7 @@ public class Miscalculation {
                 "}";
     }
 
-    public String getMaxCategoryAllTime(Category categories) {
+    public String getMaxCategoryAllTime(CategoryManager categories) {
         int categorySum;
         String maxCategory;
         StringBuilder sb = new StringBuilder();
@@ -48,7 +48,7 @@ public class Miscalculation {
         return sb.toString();
     }
 
-    public String getMaxYearCategory(Category categories, Purchase purchase) {
+    public String getMaxYearCategory(CategoryManager categories, Purchase purchase) {
         int categorySum;
         String maxCategory;
         StringBuilder sb = new StringBuilder();
@@ -78,7 +78,7 @@ public class Miscalculation {
         return sb.toString();
     }
 
-    public String getMaxMonthCategory(Category categories, Purchase purchase) {
+    public String getMaxMonthCategory(CategoryManager categories, Purchase purchase) {
         int categorySum;
         String maxCategory;
         StringBuilder sb = new StringBuilder();
@@ -109,7 +109,7 @@ public class Miscalculation {
         return sb.toString();
     }
 
-    public String getMaxDayCategory(Category categories, Purchase purchase) {
+    public String getMaxDayCategory(CategoryManager categories, Purchase purchase) {
         int categorySum;
         String maxCategory;
         StringBuilder sb = new StringBuilder();
@@ -138,5 +138,4 @@ public class Miscalculation {
                 .append(",");
         return sb.toString();
     }
-
 }
